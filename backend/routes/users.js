@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import express from "express"
 import jwt from 'jsonwebtoken'
-import User from '../models/user'
+import User from '../models/user.js'
 const router = express.Router()
 // const jwt = require('jsonwebtoken')
 // const bcrypt = require('bcrypt')
@@ -79,3 +79,5 @@ router.post('/login', (req, res, next) => {
         res.status(500).json({ error })
     }
 })
+
+export default router

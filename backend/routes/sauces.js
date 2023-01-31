@@ -1,6 +1,6 @@
-import auth from '../middleware/auth'
+import auth from '../middleware/auth.js'
 import express from "express"
-import Sauce from '../models/sauce'
+import Sauce from '../models/sauce.js'
 
 const router = express.Router()
 // const Sauce = require('../models/sauce');
@@ -41,7 +41,7 @@ router.get('/', auth, (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 });
 
-module.exports = router;
+// module.exports = router;
 
 function normalizer(sauce,req){
     return {
@@ -52,3 +52,5 @@ function normalizer(sauce,req){
 
     }
 }
+
+export default router

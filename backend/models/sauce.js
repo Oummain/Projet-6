@@ -14,4 +14,4 @@ const sauceSchema = new mongoose.Schema({
     
 })
 
-export const Sauce = mongoose.model('sauce', sauceSchema )
+export default mongoose.model('sauce', sauceSchema )
