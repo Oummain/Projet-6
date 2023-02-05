@@ -79,22 +79,44 @@ router.get('/:id', auth, async (req, res, next) => {
     try {
         const sauce = await Sauce.findOne({ id: req.params.id })
         res.status(200).json(normalizer(sauce, req))
+        console.log(sauce.usersDisliked)
     }
 
     catch (error) { res.status(404).json({ error }) }
 })
 
-router.get('/', auth, (req, res, next) => {
+router.get('/', auth, async (req, res, next) => {
     try {
         const sauces = await Sauce.find()
         res.status(200).json(sauces.map(sauce => normalizer(sauce, req)))
     }
 
-    catch (error) {res.status(400).json({ error })}
+    catch (error) { res.status(400).json({ error }) }
 })
 
-router.post('/:id/like', auth, (res, res, next) => {
-    
+router.post('/:id/like', auth, async (req, res, next) => {
+    try {
+        const sauce = await Sauce.findOne({ id: req.params.id })
+
+        let like = 0
+        if (sauce.usersLiked.push(userId)) {
+            const userDislike = sauce.usersDisliked.filter((i) => i !== userId)
+            sauce.usersDisliked.splice(0, array.length, userDislike)
+            like = 1
+        }
+
+        else if (sauce.usersDisliked.push(userId)) {
+            const userLike = sauce.usersLiked.filter((i) => i !== userId)
+            sauce.usersLiked.splice(0, array.length, userLike)
+            like = -1
+        }
+        else if (!(sauce.usersDisliked.find(userId) && sauce.usersLiked.find(userId))) {
+            like = 0
+        }
+    }
+    catch (error) { res.status(400).json({ error }) }
+
+
 })
 
 function normalizer(sauce, req) {
